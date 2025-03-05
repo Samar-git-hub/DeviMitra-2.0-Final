@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
-      <div className="logo">PropTalk</div>
+      <div className="logo">DeviMitra</div>
       <nav>
         <ul className="nav-list">
           <li><Link to="/" className={`nav-link ${isActive('/')}`}>Home</Link></li>

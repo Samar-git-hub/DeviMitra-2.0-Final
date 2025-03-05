@@ -1,6 +1,8 @@
 # Node modules
 node_modules/
 
+.env
+
 # Node backend files
 server/node_modules/
 server/dist/

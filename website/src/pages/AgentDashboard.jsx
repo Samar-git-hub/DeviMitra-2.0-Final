@@ -43,9 +43,9 @@ const AgentDashboard = () => {
     if (agentStatus === "online") {
       // Add some mock waiting clients
       setWaitingClients([
-        { id: 1, name: "Aditya Patel", language: "Hindi", waitTime: "2:30" },
-        { id: 2, name: "Priya Sharma", language: "English", waitTime: "1:15" },
-        { id: 3, name: "Rahul Verma", language: "Marathi", waitTime: "0:45" }
+        { id: 1, name: "Samar Kamat", language: "Hindi", waitTime: "2:30" },
+        { id: 2, name: "Shlok Doshi", language: "English", waitTime: "1:15" },
+        { id: 3, name: "Kartika Dhonde", language: "Marathi", waitTime: "0:45" }
       ]);
       
       // Show a client request after 5 seconds
@@ -533,12 +533,11 @@ const styles = {
     textAlign: "center",
     border: "1px solid #eee",
     transition: "transform 0.3s ease",
-  },
-  statCard: {
     ":hover": {
-      transform: "translateY(-3px)",
+        transform: "translateY(-3px)",
     }
   },
+
   statValue: {
     fontSize: "1.8em",
     fontWeight: "bold",

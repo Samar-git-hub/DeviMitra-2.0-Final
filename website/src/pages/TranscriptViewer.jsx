@@ -107,7 +107,7 @@ const TranscriptViewer = () => {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div style={styles.logo}>PropTalk</div>
+        <div style={styles.logo}>DeviMitra</div>
         <nav>
           <ul style={styles.navList}>
             <li><Link to="/" style={styles.navLink}>Home</Link></li>
@@ -340,6 +340,7 @@ const styles = {
     color: '#B2AC88',
     marginBottom: '20px',
     textAlign: 'center',
+    marginTop: '150px',
   },
   searchAndSort: {
     display: 'flex',

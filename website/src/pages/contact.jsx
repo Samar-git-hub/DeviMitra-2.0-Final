@@ -25,7 +25,7 @@ const Contact = () => {
   return (
     <div className="hero">
       <header>
-        <div className="logo" style={{ color: '#B2AC88', fontFamily: 'Sage, serif' }}>PropTalk</div>
+        <div className="logo" style={{ color: '#B2AC88', fontFamily: 'Sage, serif' }}>DeviMitra</div>
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>

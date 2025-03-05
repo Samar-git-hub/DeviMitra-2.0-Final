@@ -48,7 +48,7 @@ const UserTypeSelection = () => {
       
       <div style={styles.content}>
         <div style={styles.selectionCard}>
-          <h1 style={styles.title}>Welcome to PropTalk</h1>
+          <h1 style={styles.title}>Welcome to DeviMitra</h1>
           <p style={styles.subtitle}>Choose how you want to continue</p>
           
           <div style={styles.optionsContainer}>

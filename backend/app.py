@@ -7,7 +7,26 @@ from dotenv import load_dotenv
 import assemblyai as aai
 import google.generativeai as genai
 from elevenlabs.client import ElevenLabs
+from deep_translator import GoogleTranslator  # Import deep-translator for translation
 
+# Add a new function for translation using deep-translator
+def translate_to_english(text, language_code):
+    try:
+        translated = GoogleTranslator(source=language_code, target='en').translate(text)
+        return translated
+    except Exception as e:
+        print(f"Translation error: {e}")
+        return None
+
+def translate_to_hindi(text, language_code):
+    try:
+        translated = GoogleTranslator(source=language_code, target='hi').translate(text)
+        return translated
+    except Exception as e:
+        print(f"Translation error: {e}")
+        return None
+
+# Language selection function
 def select_language():
     while True:
         print("\n--- DeviMitra Language Selection ---")
@@ -52,7 +71,7 @@ class AI_Assistant:
 
         # Set up Gemini
         genai.configure(api_key=self.gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-2.0-flash')  # Updated to a known model; verify with Gemini docs
+        self.model = genai.GenerativeModel('gemini-2.0-flash')  
 
         # Set up ElevenLabs
         self.elevenlabs_client = ElevenLabs(api_key=self.elevenlabs_api_key)
@@ -91,8 +110,8 @@ class AI_Assistant:
                 "listening": "கேட்கிறேன்... (இப்போது பேசுங்கள்)",
                 "you_said": "நீங்கள் சொன்னீர்கள்: {transcript}",
                 "greeting": "வணக்கம்! நான் DeviMitra, உங்கள் AI உதவியாளர்। நான் உங்களுக்கு இன்று எப்படி உதவ முடியும்?",
-                "error": "எனக்கு இப்போது பதில் அளிப்பதில் சிக்கல் உள்ளது।",
-                "end": "உரையாடல் முடிந்தது।"
+                "error": "எனக்கு இப்போது பதில் அளிப்பதில் சிக்கல் உள்ளது。",
+                "end": "உரையாடல் முடிந்தது。"
             }
         }
 
@@ -226,18 +245,42 @@ class AI_Assistant:
 
         try:
             while True:
-                # Record audio
-                audio_data = self.record_audio()
+                # Ask if the user prefers text or audio input
+                input_type = input("Do you want to speak or type your question? (speak/type): ").strip().lower()
+                
+                if input_type == 'type':
+                    user_input = input(f"Enter your question in {self.language}: ")
+                else:
+                    # Record audio
+                    audio_data = self.record_audio()
 
-                # Transcribe audio
-                transcript = self.transcribe_audio(audio_data)
+                    # Transcribe audio
+                    user_input = self.transcribe_audio(audio_data)
+                    if user_input is None:
+                        continue
 
-                if transcript and transcript.strip():
-                    print(f"{self.language_config[self.language]['you_said'].format(transcript=transcript)}")
+                print(f"{self.language_config[self.language]['you_said'].format(transcript=user_input)}")
 
-                    # Generate AI response
-                    ai_response = self.generate_ai_response(transcript)
+                # Generate AI response
+                ai_response = self.generate_ai_response(user_input)
 
+                # Ask if the user wants translation to English or Hindi
+                translate_option = input("Would you like to translate the response to English? (y/n): ").strip().lower()
+                if translate_option == 'y':
+                    ai_response_english = translate_to_english(ai_response, self.language_config[self.language]['code'])
+                    if ai_response_english:
+                        print(f"AI (translated to English): {ai_response_english}")
+                        self.generate_audio(ai_response_english)
+                
+                # Translate to Hindi if the language is not already Hindi
+                if self.language != 'hindi':
+                    translate_option = input("Would you like to translate the response to Hindi? (y/n): ").strip().lower()
+                    if translate_option == 'y':
+                        ai_response_hindi = translate_to_hindi(ai_response, self.language_config[self.language]['code'])
+                        if ai_response_hindi:
+                            print(f"AI (translated to Hindi): {ai_response_hindi}")
+                            self.generate_audio(ai_response_hindi)
+                else:
                     # Generate and play audio response
                     self.generate_audio(ai_response)
 

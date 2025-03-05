@@ -1,0 +1,128 @@
+/* Ensure content starts below the Navbar */
+
+  
+  .property-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    margin-top: 500px;
+  }
+  
+  /* Main content box styling */
+  .property-container {
+    width: 100%;
+    max-width: 800px; /* Keeps form centered */
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Added margin to prevent overlap */
+  }
+  
+  /* Property title styling */
+  .property-title {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Form styling */
+  .property-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .half {
+    flex: 1;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Styling for inputs, select dropdowns, and textarea */
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Ensures amenities checkboxes are displayed properly */
+  .amenities-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .amenity-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  /* Submit button styling */
+  .analyze-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+  }
+  
+  .analyze-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .analyze-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Property Analysis Output Box */
+  .analysis-output {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .analysis-content {
+    white-space: pre-line;
+    line-height: 1.6;
+  }
+  
+  /* Make form responsive */
+  @media (max-width: 768px) {
+    .property-container {
+      padding: 15px;
+    }
+    
+    .form-row {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .amenities-container {
+      flex-direction: column;
+    }
+  }

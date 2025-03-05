@@ -1,24 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/App.css";
+import "../styles/contact.css";
 
 const About = () => {
   return (
-    <div style={styles.container}>
-      <header style={styles.header}>
-        <div style={styles.logo}>PropTalk</div>
+    <div className="hero">
+      <header>
+        <div
+          className="logo"
+          style={{ color: "#B2AC88", fontFamily: "Sage, serif" }}
+        >
+          DeviMitra
+        </div>
         <nav>
-          <ul style={styles.navList}>
-            <li><Link to="/" style={styles.navLink}>Home</Link></li>
-            <li><Link to="/features" style={styles.navLink}>Features</Link></li>
-            <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-            <li><Link to="/about" style={styles.navLink}>About</Link></li>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/features">Features</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/about">About</Link></li>
           </ul>
         </nav>
       </header>
 
-      <div style={{...styles.content, paddingTop: '80px'}}>
-        <h1 style={styles.mainHeading}>About PropTalk</h1>
+      <div className="hero-content" style={{ 
+        maxWidth: '900px', 
+        margin: '0 auto', 
+        padding: '100px 20px 20px',
+        fontFamily: "'Poppins', sans-serif"
+      }}>
+        <h1 style={styles.mainHeading}>About DeviMitra</h1>
         
         <div style={styles.section}>
           <h2 style={styles.sectionHeading}>Our Mission</h2>
@@ -104,7 +115,7 @@ const About = () => {
         </div>
 
         <div style={styles.ctaContainer}>
-          <Link to="/contact" style={{textDecoration: 'none'}}>
+          <Link to="/contact" style={{ textDecoration: 'none' }}>
             <button style={styles.ctaButton}>
               Contact Our Team
             </button>
@@ -118,83 +129,29 @@ const About = () => {
 const teamMembers = [
   {
     avatar: "👨🏽‍💼",
-    name: "Rajesh Sharma",
+    name: "Shlok Doshi",
     role: "Co-founder & Real Estate Expert"
   },
   {
     avatar: "👩🏻‍💻",
-    name: "Priya Narayan",
+    name: "Kartika Dhonde",
     role: "AI & NLP Specialist"
   },
   {
     avatar: "👨🏾‍💻",
-    name: "Vikram Desai",
+    name: "Samar Kamat",
     role: "Technology Lead"
-  },
-  {
-    avatar: "👩🏽‍🔧",
-    name: "Ananya Reddy",
-    role: "Linguistics & Translation Expert"
   }
 ];
 
 const styles = {
-  container: {
-    position: 'relative',
-    width: '100vw',
-    minHeight: '100vh',
-    background: 'rgba(255, 255, 255, 0.8)',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '50px',
-    fontFamily: "'Poppins', sans-serif",
-  },
-  header: {
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '20px 5%',
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-    zIndex: 1000,
-  },
-  logo: {
-    fontSize: '2em',
-    fontWeight: 'bold',
-    color: '#B2AC88',
-    fontFamily: 'Sage, serif',
-  },
-  navList: {
-    display: 'flex',
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-  },
-  navLink: {
-    marginLeft: '20px',
-    color: '#2c3e50',
-    textDecoration: 'none',
-    fontSize: '1.1em',
-    transition: 'color 0.3s ease',
-  },
-  content: {
-    maxWidth: '900px',
-    textAlign: 'left',
-    width: '100%',
-    margin: '0 auto',
-    paddingTop: '100px',
-  },
   mainHeading: {
     textAlign: 'center',
     marginBottom: '30px',
     color: '#B2AC88',
     fontSize: '2.8em',
     fontFamily: "Sage, serif",
+    marginTop: '1300px',
   },
   section: {
     marginBottom: '40px',

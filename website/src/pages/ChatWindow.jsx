@@ -7,7 +7,7 @@ const ChatWindow = ({ generateAnswer, detectLanguage, translateText }) => {
   const [messages, setMessages] = useState([
     { 
       text: "नमस्ते! मैं आपका रियल एस्टेट सहायक हूँ। आप किस भाषा में बात करना चाहेंगे?", 
-      translation: "Hello! I'm your real estate assistant. What language would you prefer to speak in?",
+      translation: "Hello! I'm DeviMitra, your real estate assistant. What language would you prefer to speak in?",
       detectedLanguage: "Hindi",
       user: "AI" 
     }
@@ -219,7 +219,7 @@ const ChatWindow = ({ generateAnswer, detectLanguage, translateText }) => {
   return (
     <div className="chat-container">
       <header>
-        <div className="logo">PropTalk</div>
+        <div className="logo">DeviMitra</div>
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>

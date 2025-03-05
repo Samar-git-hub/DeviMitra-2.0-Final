@@ -1,77 +1,125 @@
 (function () {
-
     const app = document.querySelector(".app");
     const socket = io();
-
     let uname;
 
-    app.querySelector(".join-screen #join-user").addEventListener("click", function () {
-        let username = app.querySelector(".join-screen #username").value;
-        if (username.length == 0) {
+    const joinScreen = app.querySelector(".join-screen");
+    const chatScreen = app.querySelector(".chat-screen");
+    const usernameInput = joinScreen.querySelector("#username");
+    const messageInput = chatScreen.querySelector("#message-input");
+    const messagesContainer = chatScreen.querySelector(".messages");
+
+    // Validate username
+    function validateUsername(username) {
+        return username.trim().length > 0 && username.trim().length <= 20;
+    }
+
+    // Join Chat Event
+    joinScreen.querySelector("#join-user").addEventListener("click", function () {
+        const username = usernameInput.value.trim();
+
+        if (!validateUsername(username)) {
+            alert("Please enter a valid username (1-20 characters)");
             return;
         }
+
         socket.emit("newuser", username);
         uname = username;
-        app.querySelector(".join-screen").classList.remove("active");
-        app.querySelector(".chat-screen").classList.add("active");
+        joinScreen.classList.remove("active");
+        chatScreen.classList.add("active");
+        messageInput.focus();
     });
 
-    app.querySelector(".chat-screen #send-message").addEventListener("click", function () {
-        let message = app.querySelector(".chat-screen #message-input").value;
-        if (message.length == 0) {
-            return;
+    // Send Message Event
+    chatScreen.querySelector("#send-message").addEventListener("click", sendMessage);
+    messageInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sendMessage();
         }
+    });
+
+    function sendMessage() {
+        const message = messageInput.value.trim();
+
+        if (message.length === 0) return;
+
         renderMessage("my", {
             username: uname,
             text: message
         });
+
         socket.emit("chat", {
             username: uname,
             text: message
         });
-        app.querySelector(".chat-screen #message-input").value = "";
+
+        messageInput.value = "";
+        scrollToBottom();
+    }
+
+    // Exit Chat Event
+    chatScreen.querySelector("#exit-chat").addEventListener("click", function () {
+        socket.emit("exituser", uname);
+        window.location.reload();
     });
 
-    app.querySelector(".chat-screen #exit-chat").addEventListener("click", function () {
-        socket.emit("exituser", uname);
-        window.location.href = window.location.href;
-    });
+    // Socket Event Listeners
     socket.on("update", function (update) {
         renderMessage("update", update);
+        scrollToBottom();
     });
 
     socket.on("chat", function (message) {
         renderMessage("other", message);
+        scrollToBottom();
     });
+
+    // Render Message Function
     function renderMessage(type, message) {
-        let messageContainer = app.querySelector(".chat-screen .messages");
-        if (type == "my") {
-            let el = document.createElement("div");
-            el.setAttribute("class", "message my-message");
-            el.innerHTML = `
-                <div>
-                    <div class="name">You</div>
-                    <div class="text">${message.text}</div>
-                </div>
-            `;
-            messageContainer.appendChild(el);
-        } else if (type == "other") {
-            let el = document.createElement("div");
-            el.setAttribute("class", "message other-message");
-            el.innerHTML = `
-                <div>
-                    <div class="name">${message.username}</div>
-                    <div class="text">${message.text}</div>
-                </div>
-            `;
-            messageContainer.appendChild(el);
-        } else if (type == "update") {
-            let el = document.createElement("div");
-            el.setAttribute("class", "update");
-            el.innerText = message;
-            messageContainer.appendChild(el);
+        const el = document.createElement("div");
+
+        switch (type) {
+            case "my":
+                el.classList.add("message", "my-message");
+                el.innerHTML = `
+                    <div>
+                        <div class="name">You</div>
+                        <div class="text">${escapeHTML(message.text)}</div>
+                    </div>
+                `;
+                break;
+            case "other":
+                el.classList.add("message", "other-message");
+                el.innerHTML = `
+                    <div>
+                        <div class="name">${escapeHTML(message.username)}</div>
+                        <div class="text">${escapeHTML(message.text)}</div>
+                    </div>
+                `;
+                break;
+            case "update":
+                el.classList.add("update");
+                el.textContent = message;
+                break;
         }
-        // scroll chat to end
-        messageContainer.scrollTop = messageContainer.scrollHeight - messageContainer.clientHeight;
+
+        messagesContainer.appendChild(el);
+    }
+
+    // Scroll to Bottom Function
+    function scrollToBottom() {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // HTML Escape Function
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g,
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag));
     }
 })();
