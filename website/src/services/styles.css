@@ -1,0 +1,337 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .app {
+    width: 90%;
+    max-width: 800px;
+    height: 85vh;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .screen {
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  
+  .screen.active {
+    display: block;
+  }
+  
+  /* Join Screen */
+  .join-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .join-screen .form {
+    width: 80%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  .join-screen .form h2 {
+    font-size: 1.8em;
+    color: #B2AC88;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  .form-input {
+    margin-bottom: 20px;
+  }
+  
+  .form-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1em;
+    color: #333;
+  }
+  
+  .form-input input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .form-input button {
+    width: 100%;
+    padding: 12px;
+    background-color: #B2AC88;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .form-input button:hover {
+    background-color: #9A957A;
+  }
+  
+  /* Chat Screen */
+  .chat-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #B2AC88;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .header button {
+    padding: 8px 12px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 0.9em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .header button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .language-selector {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .language-selector label {
+    color: white;
+    margin-right: 8px;
+    font-size: 0.9em;
+  }
+  
+  .language-selector select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    font-size: 0.9em;
+  }
+  
+  .language-selector select option {
+    background-color: white;
+    color: #333;
+  }
+  
+  .messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .message {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    word-break: break-word;
+  }
+  
+  .message.update {
+    align-self: center;
+    max-width: 100%;
+  }
+  
+  .message.my {
+    align-self: flex-end;
+  }
+  
+  .message.other {
+    align-self: flex-start;
+  }
+  
+  .message .update {
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+  }
+  
+  .message.my .name,
+  .message.other .name {
+    font-size: 0.9em;
+    margin-bottom: 3px;
+  }
+  
+  .message.my .name {
+    text-align: right;
+    color: #B2AC88;
+  }
+  
+  .message.other .name {
+    color: #3498db;
+  }
+  
+  .message.my .text {
+    background-color: #B2AC88;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px 15px 0 15px;
+    font-size: 1em;
+  }
+  
+  .message.other .text {
+    background-color: #e3f2fd;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 15px 15px 15px 0;
+    font-size: 1em;
+  }
+  
+  .message .language-tag {
+    font-size: 0.75em;
+    padding: 3px 8px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    color: #555;
+    margin-top: 5px;
+    align-self: flex-start;
+    margin-left: 5px;
+  }
+  
+  .message.my .language-tag {
+    align-self: flex-end;
+    margin-right: 5px;
+  }
+  
+  .message .translation {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    font-size: 0.9em;
+    color: #555;
+    font-style: italic;
+    display: none;
+  }
+  
+  .message .translation.active {
+    display: block;
+  }
+  
+  .message .translate-btn {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #555;
+    font-size: 0.8em;
+    border-radius: 15px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  
+  .message.my .translate-btn {
+    align-self: flex-end;
+  }
+  
+  .message .timestamp {
+    font-size: 0.7em;
+    color: #999;
+    margin-top: 5px;
+    align-self: flex-end;
+  }
+  
+  .message.other .timestamp {
+    align-self: flex-start;
+  }
+  
+  .typebox {
+    display: flex;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .typebox input {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    margin-right: 15px;
+    outline: none;
+  }
+  
+  .typebox button {
+    padding: 0 20px;
+    background-color: #B2AC88;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .typebox button:hover {
+    background-color: #9A957A;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .app {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+    }
+    
+    .message {
+      max-width: 85%;
+    }
+    
+    .header {
+      padding: 10px 15px;
+    }
+    
+    .language-selector label {
+      display: none;
+    }
+  }
